@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  python:
+    build:
+      context: .
+      dockerfile: docker/python/Dockerfile
+    volumes:
+      - .:/predict_app
+    ports:
+      - 9000:9000
+      - 9001:9001
+    command:
+      - /bin/sh
+      - -c
+      - |
+        nohup python bot.py &
+        gunicorn -w 1 app_image:app -b 0.0.0.0:9001 -k gevent -D
+        gunicorn -w 1 app_url:app -b 0.0.0.0:9000 -k gevent
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    depends_on:
+      - python
+    ports:
+    - 81:81
