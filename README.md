@@ -1,4 +1,4 @@
-# IEMS 5780 Face Classification Report
+# Emotion & Gender Classification 
 
 ## Functions of the system 
 
@@ -272,5 +272,3 @@ Then run bot.py to receive the image from telegram.
 ```bash
 $ python bot.py
 ```
-
-Open Telegram and search the bot  "iems5780-1155118093" and send some images :)
